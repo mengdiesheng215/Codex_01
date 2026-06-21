@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>父亲节快乐</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f0f1a;
+            color: #f0ece4;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #1a1a2e 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(210, 180, 140, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(218, 165, 32, 0.06) 0%, transparent 50%);
+            animation: heroGlow 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(2%, 1%) rotate(3deg); }
+        }
+
+        /* Stars */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: twinkle var(--duration) ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 0.9; transform: scale(1.2); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.4rem 1.4rem;
+            border: 1px solid rgba(210, 180, 140, 0.4);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            color: #d2b48c;
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            backdrop-filter: blur(4px);
+            background: rgba(210, 180, 140, 0.08);
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(2.8rem, 10vw, 5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #f0ece4 0%, #d2b48c 50%, #f0ece4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
+            font-weight: 300;
+            color: #c4b8a8;
+            letter-spacing: 0.15em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 0.6s forwards;
+        }
+
+        .hero .divider-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d2b48c, transparent);
+            margin: 1.2rem auto;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.8s forwards;
+        }
+
+        .hero .date-tag {
+            font-size: 0.85rem;
+            color: #8a7e6e;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 1s forwards;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---- Scroll indicator ---- */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0.5;
+            animation: bounceDown 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: #8a7e6e;
+        }
+
+        .scroll-indicator .arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid #8a7e6e;
+            border-bottom: 2px solid #8a7e6e;
+            transform: rotate(45deg);
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ---- Sections ---- */
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.6rem;
+            color: #f0ece4;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #8a7e6e;
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- Letter / Message ---- */
+        .letter-section {
+            background: linear-gradient(180deg, #0f0f1a 0%, #161625 100%);
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(210, 180, 140, 0.12);
+            border-radius: 16px;
+            padding: 2rem 1.6rem;
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-card::before {
+            content: '\201C';
+            position: absolute;
+            top: -0.2rem;
+            left: 0.8rem;
+            font-size: 5rem;
+            font-family: 'Noto Serif SC', serif;
+            color: rgba(210, 180, 140, 0.15);
+            line-height: 1;
+        }
+
+        .letter-card p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #d4ccc4;
+            margin-bottom: 1.2rem;
+            text-indent: 2em;
+        }
+
+        .letter-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter-card .signature {
+            text-align: right;
+            margin-top: 1.5rem;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            color: #d2b48c;
+            text-indent: 0;
+        }
+
+        /* ---- Qualities / 3 cards ---- */
+        .qualities {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quality-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(210, 180, 140, 0.08);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .quality-item:hover {
+            border-color: rgba(210, 180, 140, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .quality-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(210, 180, 140, 0.1);
+        }
+
+        .quality-text h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f0ece4;
+            margin-bottom: 0.2rem;
+        }
+
+        .quality-text p {
+            font-size: 0.82rem;
+            color: #9a8e7e;
+            line-height: 1.4;
+        }
+
+        /* ---- Photo area ---- */
+        .photo-section {
+            background: linear-gradient(180deg, #161625 0%, #0f0f1a 100%);
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(210, 180, 140, 0.15);
+            background: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-frame .placeholder-content {
+            text-align: center;
+            color: #5a4e3e;
+        }
+
+        .photo-frame .placeholder-content .icon {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+            opacity: 0.5;
+        }
+
+        .photo-frame .placeholder-content p {
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .photo-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6a5e4e;
+            margin-top: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- Wish button ---- */
+        .wish-section {
+            text-align: center;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        .wish-button {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Noto Sans SC', sans-serif;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #d2b48c, #c4a070);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(210, 180, 140, 0.3);
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wish-button:active {
+            transform: scale(0.96);
+        }
+
+        .wish-button .sparkle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* wish result */
+        .wish-result {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            min-height: 3rem;
+            opacity: 0;
+            transition: opacity 0.6s;
+            font-family: 'Noto Serif SC', serif;
+            color: #d2b48c;
+        }
+
+        .wish-result.show {
+            opacity: 1;
+        }
+
+        /* ---- Footer ---- */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem 3rem;
+            border-top: 1px solid rgba(210, 180, 140, 0.06);
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: #4a3e2e;
+            letter-spacing: 0.1em;
+        }
+
+        /* ---- Confetti particles ---- */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            top: -10px;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+            animation: confettiFall var(--fall-duration, 3s) ease-in forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(0.4);
+            }
+        }
+
+        /* ---- Responsive tweaks ---- */
+        @media (min-width: 480px) {
+            .qualities {
+                flex-direction: row;
+            }
+            .quality-item {
+                flex: 1;
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+            .letter-card {
+                padding: 2.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="stars" id="stars"></div>
+        <div class="hero-content">
+            <div class="hero-badge">父亲节 2026</div>
+            <h1>爸爸，<br />父亲节快乐</h1>
+            <div class="divider-line"></div>
+            <p class="subtitle">您是我心中永远的超级英雄</p>
+            <p class="date-tag">—— 6月21日 · 感恩有您 ——</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>向下滚动</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- Letter -->
+    <section class="letter-section" id="letter">
+        <h2 class="section-title">给爸爸的一封信</h2>
+        <p class="section-sub">一些一直想对您说的话</p>
+        <div class="letter-card">
+            <p>亲爱的爸爸，</p>
+            <p>小时候，总觉得您是无所不能的超人。您宽厚的肩膀，是我看世界的瞭望台；您粗糙的双手，撑起了我们整个家。您话不多，但每一句叮嘱都沉甸甸地落在我心上。</p>
+            <p>长大后，才慢慢读懂您的不容易。那些早出晚归的日子，那些默默扛下所有压力的时刻，那些把最好的都留给我的选择——您从不抱怨，只是用行动告诉我什么是担当，什么是爱。</p>
+            <p>您是我人生的第一位老师，教会我正直、坚韧和温柔。您或许不是世界上最富有的人，但您给了我世界上最宝贵的礼物：一个温暖的家，和一颗勇敢的心。</p>
+            <p>谢谢您，爸爸。谢谢您用岁月换我成长，谢谢您用背影为我挡风遮雨。您陪我长大，我陪您变老。</p>
+            <p>今天，我只想说一句：</p>
+            <p style="text-align:center; font-size:1.3rem; color:#d2b48c; text-indent:0; margin:0.8rem 0;">爸爸，我爱您。❤️</p>
+            <p class="signature">—— 您的孩子</p>
+        </div>
+    </section>
+
+    <!-- Qualities -->
+    <section>
+        <h2 class="section-title">您教会我的事</h2>
+        <p class="section-sub">那些刻在骨子里的道理</p>
+        <div class="qualities">
+            <div class="quality-item">
+                <div class="quality-icon">🏔️</div>
+                <div class="quality-text">
+                    <h3>责任如山</h3>
+                    <p>您教会我承诺的重量，和说到做到的底气。</p>
+                </div>
+            </div>
+            <div class="quality-item">
+                <div class="quality-icon">🌊</div>
+                <div class="quality-text">
+                    <h3>胸怀似海</h3>
+                    <p>您教会我包容，用沉默的温柔接纳一切。</p>
+                </div>
+            </div>
+            <div class="quality-item">
+                <div class="quality-icon">🌳</div>
+                <div class="quality-text">
+                    <h3>坚韧如树</h3>
+                    <p>您教会我无论风雨，都要扎根向上生长。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo area -->
+    <section class="photo-section">
+        <h2 class="section-title">📸 我们的回忆</h2>
+        <p class="section-sub">在这里放一张你和爸爸的合照吧</p>
+        <div class="photo-frame" id="photoFrame">
+            <div class="placeholder-content" id="placeholderContent">
+                <div class="icon">🖼️</div>
+                <p>点击此处上传照片</p>
+            </div>
+            <img id="uploadedPhoto" src="" alt="合照" style="display:none; width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;" />
+            <input type="file" accept="image/*" id="photoInput" style="display:none;" />
+        </div>
+        <p class="photo-caption">点击上方区域上传你们的合照</p>
+    </section>
+
+    <!-- Wish button -->
+    <section class="wish-section">
+        <h2 class="section-title" style="font-size:1.3rem;">送出一份祝福</h2>
+        <button class="wish-button" id="wishButton">
+            ✨ 点击送出祝福 ✨
+        </button>
+        <div class="wish-result" id="wishResult"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>❤️ 献给我最敬爱的爸爸 ❤️</p>
+    </footer>
+
+    <script>
+        // ---- Stars ----
+        (function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                star.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(star);
+            }
+        })();
+
+        // ---- Photo upload ----
+        const photoFrame = document.getElementById('photoFrame');
+        const photoInput = document.getElementById('photoInput');
+        const uploadedPhoto = document.getElementById('uploadedPhoto');
+        const placeholderContent = document.getElementById('placeholderContent');
+
+        photoFrame.addEventListener('click', () => {
+            photoInput.click();
+        });
+
+        photoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                uploadedPhoto.src = ev.target.result;
+                uploadedPhoto.style.display = 'block';
+                placeholderContent.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ---- Confetti ----
+        function fireConfetti() {
+            const container = document.createElement('div');
+            container.className = 'confetti-container';
+            document.body.appendChild(container);
+
+            const colors = ['#d2b48c', '#c4a070', '#f0ece4', '#e8c98a', '#b8860b', '#ffd700', '#cd853f'];
+            const shapes = ['50%', '0%'];
+
+            for (let i = 0; i < 60; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = Math.random() * 6 + 4;
+                piece.style.width = size + 'px';
+                piece.style.height = size + 'px';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+                piece.style.setProperty('--fall-duration', (Math.random() * 2 + 2.5) + 's');
+                piece.style.animationDelay = Math.random() * 1.5 + 's';
+                container.appendChild(piece);
+            }
+
+            setTimeout(() => {
+                container.remove();
+            }, 5000);
+        }
+
+        // ---- Wish button ----
+        const wishButton = document.getElementById('wishButton');
+        const wishResult = document.getElementById('wishResult');
+
+        const wishes = [
+            '爸爸，祝您身体健康，笑口常开！',
+            '愿时光慢些，让我好好爱您。',
+            '您是世界上最好的爸爸！',
+            '祝爸爸永远年轻，永远帅气！',
+            '岁月长，心意不变，爸爸我爱您。',
+            '您的笑容，是我最大的幸福。',
+            '感恩有您，我的超级英雄！',
+            '愿您每天都能睡个好觉，吃嘛嘛香！'
+        ];
+
+        wishButton.addEventListener('click', () => {
+            const wish = wishes[Math.floor(Math.random() * wishes.length)];
+            wishResult.textContent = '🙏 ' + wish;
+            wishResult.classList.add('show');
+            fireConfetti();
+        });
+
+        // ---- Intersection Observer for fade-in ----
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        document.querySelectorAll('.letter-card, .quality-item, .photo-frame, .wish-button').forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(24px)';
+            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            observer.observe(el);
+        });
+
+        console.log('❤️ 爸爸，父亲节快乐！');
+    </script>
+</body>
+</html>
